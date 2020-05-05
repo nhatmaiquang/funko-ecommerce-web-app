@@ -1,19 +1,44 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Layout from '../core/Layout';
 import { API } from '../config';
 
 const Signup = () => {
 
-    const[values, setValues] = useState({
+    const [values, setValues] = useState({
         name: '',
         email: '',
         password: '',
         error: '',
         success: false
-    })
+    });
+
+    const { name, email, password } = values
 
     const handleChange = name => event => {
         setValues({ ...values, error: false, [name]: event.target.value })
+    };
+
+    const signup = (user) => {
+        // console.log(name, email, password);
+        fetch(`${API}/signup`, {
+            method: "POST",
+            headers: {
+                Accept: 'application/json',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then(response => {
+                return response.json()
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
+
+    const clickSubmit = event => {
+        event.preventDefault()
+        signup({ name, email, password })
     };
 
     const signUpForm = () => (
@@ -30,7 +55,7 @@ const Signup = () => {
                 <label className="text-muted">Password</label>
                 <input onChange={handleChange('password')} type="password" className="form-control" />
             </div>
-            <button className="btn btn-primary">
+            <button onClick={clickSubmit} className="btn btn-primary">
                 Submit
             </button>
         </form>
