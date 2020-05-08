@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import { getProducts } from './apiCore';
@@ -37,8 +36,8 @@ const Home = () => {
 
     return (
         <Layout
-            title="Funko E-commerce Web App"
-            description="Funko Node React E-commerce Web App"
+            title="Funko E-commerce"
+            description="Funko E-commerce App"
             className="container-fluid"
         >
             <h2 className="mb-4">New Arrivals</h2>
