@@ -28,12 +28,13 @@ const Shop = () => {
     };
 
     const loadFilteredResults = newFilters => {
-        // console.log(newFilters);
+        console.log(newFilters);
         getFilteredProducts(skip, limit, newFilters).then(data => {
             if (data.error) {
                 setError(data.error);
             } else {
                 setFilteredResults(data.data);
+                console.log(data.data);
                 setSize(data.size);
                 setSkip(0);
             }
@@ -48,6 +49,7 @@ const Shop = () => {
                 setError(data.error);
             } else {
                 setFilteredResults([...filteredResults, ...data.data]);
+                console.log(...data.data);
                 setSize(data.size);
                 setSkip(toSkip);
             }
@@ -98,7 +100,7 @@ const Shop = () => {
     return (
         <Layout
             title="Shop Page"
-            description="Search and find books of your choice"
+            description="Dit me may"
             className="container-fluid"
         >
             <div className="row">
