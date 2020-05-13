@@ -1,10 +1,12 @@
-import React from 'react';
-import Layout from '../core/Layout';
-import { isAuthenticated } from '../auth';
-import { Link } from 'react-router-dom';
-const AdminDashboard = () => {
+import React from "react";
+import Layout from "../core/Layout";
+import { isAuthenticated } from "../auth";
+import { Link } from "react-router-dom";
 
-    const { user: { _id, name, email, role } } = isAuthenticated();
+const AdminDashboard = () => {
+    const {
+        user: { _id, name, email, role }
+    } = isAuthenticated();
 
     const adminLinks = () => {
         return (
@@ -21,6 +23,16 @@ const AdminDashboard = () => {
                             Create Product
                         </Link>
                     </li>
+                    <li className="list-group-item">
+                        <Link className="nav-link" to="/admin/orders">
+                            View Orders
+                        </Link>
+                    </li>
+                    <li className="list-group-item">
+                        <Link className="nav-link" to="/admin/products">
+                            Manage Products
+                        </Link>
+                    </li>
                 </ul>
             </div>
         );
@@ -28,13 +40,13 @@ const AdminDashboard = () => {
 
     const adminInfo = () => {
         return (
-            <div className=" card mb-5">
+            <div className="card mb-5">
                 <h3 className="card-header">User Information</h3>
                 <ul className="list-group">
                     <li className="list-group-item">{name}</li>
                     <li className="list-group-item">{email}</li>
                     <li className="list-group-item">
-                        {role === 1 ? 'Admin' : 'Registered User'}
+                        {role === 1 ? "Admin" : "Registered User"}
                     </li>
                 </ul>
             </div>
@@ -43,19 +55,14 @@ const AdminDashboard = () => {
 
     return (
         <Layout
-            title="User Dashboard"
-            description={`Dit me may ${name}`}
+            title="Dashboard"
+            description={`Xin chao ${name}!`}
             className="container-fluid"
         >
             <div className="row">
-                <div className="col-3">
-                    {adminLinks()}
-                </div>
-                <div className="col-9">
-                    {adminInfo()}
-                </div>
+                <div className="col-3">{adminLinks()}</div>
+                <div className="col-9">{adminInfo()}</div>
             </div>
-
         </Layout>
     );
 };
