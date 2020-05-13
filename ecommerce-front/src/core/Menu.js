@@ -1,19 +1,19 @@
-import React, { Fragment } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { signout, isAuthenticated } from '../auth';
+import React, { Fragment } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { signout, isAuthenticated } from "../auth";
+import { itemTotal } from "./cartHelpers";
 
 const isActive = (history, path) => {
     if (history.location.pathname === path) {
-        return { color: '#ff9900' };
+        return { color: "#ff9900" };
     } else {
-        return { color: '#000000' };
+        return { color: "#ffffff" };
     }
 };
 
 const Menu = ({ history }) => (
     <div>
-        <ul className="nav nav-tabs bg primary">
-
+        <ul className="nav nav-tabs bg-primary">
             <li className="nav-item">
                 <Link
                     className="nav-link"
@@ -31,6 +31,19 @@ const Menu = ({ history }) => (
                     to="/shop"
                 >
                     Shop
+                </Link>
+            </li>
+
+            <li className="nav-item">
+                <Link
+                    className="nav-link"
+                    style={isActive(history, "/cart")}
+                    to="/cart"
+                >
+                    Cart{" "}
+                    <sup>
+                        <small className="cart-badge">{itemTotal()}</small>
+                    </sup>
                 </Link>
             </li>
 
@@ -69,6 +82,7 @@ const Menu = ({ history }) => (
                             Signin
                         </Link>
                     </li>
+
                     <li className="nav-item">
                         <Link
                             className="nav-link"
@@ -85,10 +99,10 @@ const Menu = ({ history }) => (
                 <li className="nav-item">
                     <span
                         className="nav-link"
-                        style={{ cursor: 'pointer', color: '#000000' }}
+                        style={{ cursor: "pointer", color: "#ffffff" }}
                         onClick={() =>
                             signout(() => {
-                                history.push('/');
+                                history.push("/");
                             })
                         }
                     >
@@ -96,7 +110,6 @@ const Menu = ({ history }) => (
                     </span>
                 </li>
             )}
-
         </ul>
     </div>
 );
